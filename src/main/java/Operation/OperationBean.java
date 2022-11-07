@@ -19,5 +19,10 @@ public class OperationBean implements Operation {
 		em.persist(t);
 		return t;
 	}
+	
+	@Override
+	public Ticket getTicket(int id) {
+		return em.find(Ticket.class, id);
+	}
 
 }

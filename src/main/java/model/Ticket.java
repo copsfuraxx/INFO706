@@ -1,6 +1,7 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,40 +20,40 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	private LocalDate dateEntree;
+	private LocalDateTime dateEntree;
 	
-	private LocalDate dateSortie;
+	private LocalDateTime dateSortie;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "payementId", referencedColumnName = "id")
-	private Payement payement;
+	private List<Payement> payement;
 	
 	public Ticket() {
-		dateEntree = LocalDate.now();
+		dateEntree = LocalDateTime.now();
 		dateSortie = null;
 	}
 
-	public LocalDate getDateSortie() {
+	public LocalDateTime getDateSortie() {
 		return dateSortie;
 	}
 
 	public void setDateSortie() {
-		dateSortie = LocalDate.now();
+		dateSortie = LocalDateTime.now();
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public LocalDate getDateEntree() {
+	public LocalDateTime getDateEntree() {
 		return dateEntree;
 	}
 
-	public Payement getPayement() {
+	public List<Payement> getPayement() {
 		return payement;
 	}
 
-	public void setPayementId(Payement payement) {
+	/*public void setPayementId(Payement payement) {
 		this.payement = payement;
-	}
+	}*/
 }

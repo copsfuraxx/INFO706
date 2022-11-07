@@ -1,31 +1,23 @@
 package web;
 
 import java.io.IOException;
-
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Operation.Operation;
-import model.Ticket;
-
 /**
- * Servlet implementation class CreerTicketServlet
+ * Servlet implementation class Born1
  */
-@WebServlet("/CreerTicketServlet")
-public class CreerTicketServlet extends HttpServlet {
+@WebServlet("/Born1")
+public class Born1Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	@EJB
-	private Operation op;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreerTicketServlet() {
+    public Born1Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +27,8 @@ public class CreerTicketServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Ticket t = op.creerTicket();
-		
-		request.setAttribute("ticket", t);
-
-		//response.getWriter().println("C'est fait");
-
-		request.getRequestDispatcher("/AfficherTicket.jsp").forward(request, response);	
+		response.getWriter().append("<button onclick=\"window.location='CreerTicketServlet';\">Créer un ticket</button>");
+		//response.getWriter().append("<input TYPE=\"button\" Value=\"Ticket\" onclick=\"window.location='CreerTicketServlet';\">");
 	}
 
 	/**

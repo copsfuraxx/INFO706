@@ -13,10 +13,10 @@ import Operation.Operation;
 import model.Ticket;
 
 /**
- * Servlet implementation class CreerTicketServlet
+ * Servlet implementation class ValiderPaiementServlet
  */
-@WebServlet("/CreerTicketServlet")
-public class CreerTicketServlet extends HttpServlet {
+@WebServlet("/ValiderPaiementServlet")
+public class ValiderPaiementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
@@ -25,7 +25,7 @@ public class CreerTicketServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreerTicketServlet() {
+    public ValiderPaiementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +35,16 @@ public class CreerTicketServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Ticket t = op.creerTicket();
-		
-		request.setAttribute("ticket", t);
-
-		//response.getWriter().println("C'est fait");
-
-		request.getRequestDispatcher("/AfficherTicket.jsp").forward(request, response);	
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("n_ticket"));
+		Ticket t = op.getTicket(id);
+		
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
