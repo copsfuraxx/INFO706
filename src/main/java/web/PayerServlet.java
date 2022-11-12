@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Operation.Operation;
+import model.PayementType;
 import model.Ticket;
 
 /**
@@ -52,7 +53,8 @@ public class PayerServlet extends HttpServlet {
 		float price = calculatePrice(t.getDateEntree(),now);
 		request.setAttribute("price", price);
 		request.setAttribute("now", now);
-		
+		System.out.println(PayementType.getStrings());
+		request.setAttribute("payementTypes", PayementType.getStrings());
 		request.getRequestDispatcher("/Payer.jsp").forward(request, response);	
 	}
 	

@@ -8,7 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="ValiderPaiement" type="post">
+<%@ page import="java.util.ArrayList" %>
+<% ArrayList<String> list = (ArrayList<String>) request.getAttribute("payementTypes"); %>
+
+	<form action="ValiderPaiement" method="post">
 		<h1>Affichage ticket</h1>
 		<p>numero : ${ticket.id}</p>
 		<p>date entree : ${ticket.dateEntree}</p>
@@ -20,9 +23,16 @@
 			<label>Recue</label>
 			<input type="checkbox" name="recue">
 		</p>
-		<input name="id" type="hidden" value="${ticket.id}">
+		<input name="n_ticket" type="hidden" value="${ticket.id}">
 		<input name="price" type="hidden" value="${price}">
 		<input name=now type="hidden" value="${now}">
+		<select name="typePayement">
+			<% for(int i = 0; i < list.size(); i++) { 
+				String item = list.get(i);
+			%>
+			<option value="<%= item %>"><%= item %></option>
+			<% } %>
+		</select>
 		<input type="submit" value="Effectuer le paiement">
 	</form>
 </body>

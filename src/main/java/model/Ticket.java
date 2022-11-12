@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,12 +26,12 @@ public class Ticket {
 	private LocalDateTime dateSortie;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "payementId", referencedColumnName = "id")
-	private List<Payement> payement;
+	private List<Payement> payements;
 	
 	public Ticket() {
 		dateEntree = LocalDateTime.now();
 		dateSortie = null;
+		payements = new ArrayList<>();
 	}
 
 	public LocalDateTime getDateSortie() {
@@ -49,11 +50,23 @@ public class Ticket {
 		return dateEntree;
 	}
 
-	public List<Payement> getPayement() {
-		return payement;
+	public List<Payement> getPayements() {
+		return payements;
+	}
+	
+	public Payement getPayement(int i) {
+		return payements.get(i);
 	}
 
-	/*public void setPayementId(Payement payement) {
-		this.payement = payement;
-	}*/
+	public void addPayement(Payement payement) {
+		payements.add(payement);
+	}
+	
+	public double getTotalMontant() {
+		double m = 0d;
+		for(Payement p : payements) {
+			m += p.getMontant();
+		}
+		return m;
+	}
 }

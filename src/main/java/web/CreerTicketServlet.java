@@ -39,8 +39,6 @@ public class CreerTicketServlet extends HttpServlet {
 		
 		request.setAttribute("ticket", t);
 
-		//response.getWriter().println("C'est fait");
-
 		request.getRequestDispatcher("/AfficherTicket.jsp").forward(request, response);	
 	}
 

@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +14,14 @@ public class Payement {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private PayementType payementType;
-	private LocalDate date;
+	private LocalDateTime date;
 	private double montant;
 	
 	public Payement() {}
 	
-	public Payement(PayementType payementType,double montant) {
+	public Payement(PayementType payementType, double montant, LocalDateTime date) {
 		this.payementType = payementType;
-		this.date = LocalDate.now();
+		this.date = date;
 		this.montant = montant;
 	}
 
@@ -45,7 +45,7 @@ public class Payement {
 		return id;
 	}
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 	

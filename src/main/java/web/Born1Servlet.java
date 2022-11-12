@@ -28,7 +28,6 @@ public class Born1Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("<button onclick=\"window.location='CreerTicketServlet';\">Créer un ticket</button>");
-		//response.getWriter().append("<input TYPE=\"button\" Value=\"Ticket\" onclick=\"window.location='CreerTicketServlet';\">");
 	}
 
 	/**

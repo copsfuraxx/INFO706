@@ -8,5 +8,5 @@ public interface Operation {
 	
 	Ticket getTicket(int id);
 	
-	//Payement creerPayement(Ticket ticket); 
+	void addPayementToTicket(Payement p, int id);
 }
