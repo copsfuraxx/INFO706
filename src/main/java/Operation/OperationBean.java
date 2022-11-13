@@ -1,5 +1,7 @@
 package Operation;
 
+import java.time.LocalDateTime;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,5 +32,13 @@ public class OperationBean implements Operation {
 		Ticket t = getTicket(id);
 		t.addPayement(p);
 	}
+
+	@Override
+	public void addSortieToTicket(int id) {
+		Ticket t = getTicket(id);
+		t.setDateSortie();
+	}
+	
+	
 
 }

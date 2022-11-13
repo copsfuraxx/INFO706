@@ -46,10 +46,12 @@ public class ValiderSortieServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("n_ticket"));
 		Ticket t = op.getTicket(id);
-		if(t.isValid(LocalDateTime.now()))
+		if(t.isValid(LocalDateTime.now())) {
 			response.getWriter().append("Ouvert");
+			op.addSortieToTicket(id);
+			}
 		else
-			response.getWriter().append("Fermet");
+			response.getWriter().append("Fermer");
 	}
 
 }
