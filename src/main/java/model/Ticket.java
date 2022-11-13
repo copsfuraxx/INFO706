@@ -1,6 +1,8 @@
 package model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,8 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Ticket {
+	private final static double pricePerMinute = 0.02;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -68,5 +72,23 @@ public class Ticket {
 			m += p.getMontant();
 		}
 		return m;
+	}
+	
+	public double getPrice(LocalDateTime now) {
+		if(payements.isEmpty()) {
+			return minutesBetween(dateEntree, now);
+		}else {
+			return minutesBetween(payements.get(payements.size() - 1).getDate(), now);
+		}
+	}
+	
+	private double minutesBetween(LocalDateTime from, LocalDateTime to) {
+		Duration totalTime = Duration.between(from, to);
+		return totalTime.toMinutes();
+	}
+	
+	public boolean isValid(LocalDateTime now) {
+		if(payements.isEmpty()) return false;
+		return payements.get(payements.size() - 1).isValid(now);
 	}
 }

@@ -1,7 +1,6 @@
 package web;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.ejb.EJB;
@@ -12,23 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Operation.Operation;
-import model.PayementType;
 import model.Ticket;
 
 /**
- * Servlet implementation class Payer
+ * Servlet implementation class ValiderSortieServlet
  */
-@WebServlet("/Payer")
-public class PayerServlet extends HttpServlet {
+@WebServlet("/ValiderSortie")
+public class ValiderSortieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	@EJB
 	private Operation op;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PayerServlet() {
+    public ValiderSortieServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,17 +43,13 @@ public class PayerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("n_ticket"));
 		// TODO Auto-generated method stub
+		int id = Integer.parseInt(request.getParameter("n_ticket"));
 		Ticket t = op.getTicket(id);
-		request.setAttribute("ticket", t);
-		LocalDateTime now = LocalDateTime.now();
-		double price = t.getPrice(now);
-		request.setAttribute("price", price);
-		request.setAttribute("now", now);
-		System.out.println(PayementType.getStrings());
-		request.setAttribute("payementTypes", PayementType.getStrings());
-		request.getRequestDispatcher("/Payer.jsp").forward(request, response);	
+		if(t.isValid(LocalDateTime.now()))
+			response.getWriter().append("Ouvert");
+		else
+			response.getWriter().append("Fermet");
 	}
 
 }

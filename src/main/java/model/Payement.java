@@ -1,5 +1,6 @@
 package model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -47,6 +48,11 @@ public class Payement {
 
 	public LocalDateTime getDate() {
 		return date;
+	}
+	
+	public boolean isValid(LocalDateTime now) {
+		Duration d = Duration.between(date, now);
+		return d.toMinutes() < 15l;
 	}
 	
 	
